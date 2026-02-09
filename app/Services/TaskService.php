@@ -30,7 +30,13 @@ class TaskService
     // one task
     public function show(int $id)
     {
-        return Task::with(['assignee', 'creator'])->findOrFail($id);
+        $query = Task::with(['assignee', 'creator', 'dependencies'])->where('id', $id);
+
+        if (auth('sanctum')->user()->hasRole('user')) {
+            $query->where('assignee_id', auth('sanctum')->id());
+        }
+
+        return $query->firstOrFail();
     }
 
     public function store(array $data)
@@ -61,8 +67,7 @@ class TaskService
             'description' => $data['description'] ?? null,
             'due_date' => $data['due_date'] ?? null,
             'assignee_id' => $data['assignee_id'],
-            'created_by' => auth('sanctum')->id(),
-        ]);
+[]        ]);
 
         // paivotable for dependencies
         if (!empty($data['dependencies'])) {
