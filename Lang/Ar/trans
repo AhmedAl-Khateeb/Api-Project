@@ -1,0 +1,7 @@
+<?php
+
+return
+[
+    'invalid credentials' => 'بيانات الاعتماد غير صحيحة',
+    'account-not-active' => 'الحساب غير نشط',
+];

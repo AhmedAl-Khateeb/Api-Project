@@ -1,0 +1,6 @@
+<?php
+
+return [
+    'invalid credentials' => 'Invalid credentials',
+    'account-not-active' => 'Account is not active',
+];
